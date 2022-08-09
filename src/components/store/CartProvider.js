@@ -11,8 +11,9 @@ const cartReducer = (state, action) =>{
     switch(action.type)
     {
         case "ADD":
+            console.log(action.item);
             const existingCartItemIndex = state.items.findIndex((item)=>{
-                return item.id = action.item.id;
+                return item.id === action.item.id;
             });
             const existingCartItem = state.items[existingCartItemIndex];
             let updatedItem;
@@ -54,6 +55,7 @@ const cartReducer = (state, action) =>{
 const CartProvider = (props) =>{
     const [cartState, dispatchCartAction] = useReducer(cartReducer,defaultCartState);
     const addItemToCartHandler = item => {
+        console.log("Add ", item.id);
         dispatchCartAction({type: 'ADD',item})
     };
     const removeItemFromCartHanlder = id =>{
